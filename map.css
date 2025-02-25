@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
+  
+  /* Map container styling */
+  #map {
+    position: relative;
+    width: 100%;
+    height: 500px; /* Adjust height as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 1em;
+  }
+  
+  /* The SVG overlay fills the map container and sits on top */
+  #map svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allow map interactions */
+    z-index: 10; /* Ensure SVG stays above map tiles */
+  }
+  
+  /* Style for station circles */
+  #map circle {
+    pointer-events: auto; /* Enable tooltips */
+    /* Default fill if CSS variables not supported */
+    fill: steelblue;
+    fill-opacity: 0.6;
+    stroke: white;
+    stroke-width: 1;
+    /* Use custom property for color based on traffic flow */
+    /* CSS Variables for mixing colors */
+    --color-departures: steelblue;
+    --color-arrivals: darkorange;
+    --color: color-mix(
+      in oklch,
+      var(--color-departures) calc(100% * var(--departure-ratio, 0.5)),
+      var(--color-arrivals)
+    );
+    fill: var(--color, steelblue);
+  }
+  
+  /* Enhanced Legend styling */
+  .legend {
+    display: flex;
+    flex-direction: column;
+    margin-block: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #f5f5f5;
+  }
+  
+  .legend-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .legend-title #time-label {
+    font-style: italic;
+    font-weight: normal;
+    font-size: 0.9em;
+  }
+  
+  .color-scale {
+    display: flex;
+    gap: 1px;
+    height: 30px;
+    margin-bottom: 5px;
+  }
+  
+  .color-scale > div {
+    flex: 1;
+    height: 100%;
+    /* CSS variables for mixing colors */
+    --color-departures: steelblue;
+    --color-arrivals: darkorange;
+  }
+  
+  .color-scale > div:nth-child(1) { --departure-ratio: 1.0; background: var(--color-departures); }
+  .color-scale > div:nth-child(2) { --departure-ratio: 0.8; background: color-mix(in oklch, var(--color-departures) 80%, var(--color-arrivals)); }
+  .color-scale > div:nth-child(3) { --departure-ratio: 0.6; background: color-mix(in oklch, var(--color-departures) 60%, var(--color-arrivals)); }
+  .color-scale > div:nth-child(4) { --departure-ratio: 0.4; background: color-mix(in oklch, var(--color-departures) 40%, var(--color-arrivals)); }
+  .color-scale > div:nth-child(5) { --departure-ratio: 0.2; background: color-mix(in oklch, var(--color-departures) 20%, var(--color-arrivals)); }
+  .color-scale > div:nth-child(6) { --departure-ratio: 0.0; background: var(--color-arrivals); }
+  
+  .legend-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+  }
+  
+  .size-legend {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    gap: 10px;
+  }
+  
+  .size-circles {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .size-circle {
+    background-color: #888;
+    border-radius: 50%;
+    border: 1px solid white;
+    opacity: 0.7;
+    display: inline-block;
+  }
+  
+  .size-labels {
+    display: flex;
+    font-size: 0.8em;
+    gap: 10px;
+  }
+  
+  /* Time slider styles */
+  #time-slider {
+    width: 200px;
+    margin: 0 10px;
+  }
+  
+  #selected-time {
+    display: inline-block;
+    min-width: 70px;
+  }

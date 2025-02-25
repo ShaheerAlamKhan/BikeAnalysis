@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Biketrax </title>
+    <!-- Global styles -->
+    <link rel="stylesheet" href="global.css" />
+    <!-- Map specific styles -->
+    <link rel="stylesheet" href="map.css" />
+    <!-- Theme styles -->
+    <link rel="stylesheet" href="theme.css" />
+    <!-- Mapbox GL JS CSS -->
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🚴</text></svg>" type="image/svg+xml">
+  </head>
+  <body>
+    <header>
+      <h1>🚴🏼‍♀️ BikeTrax</h1>
+      <label for="time-slider">
+        Filter by time:
+        <input type="range" id="time-slider" min="-1" max="1440" value="-1" />
+        <time id="selected-time"></time>
+        <em id="any-time">(any time)</em>
+      </label>
+      
+      <!-- Theme switcher -->
+      <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="theme-toggle">
+          <input type="checkbox" id="theme-toggle" />
+          <div class="slider round">
+            <span class="mode-icon light-icon">☀️</span>
+            <span class="mode-icon dark-icon">🌙</span>
+          </div>
+        </label>
+      </div>
+    </header>
+    
+    <!-- Map container with an embedded SVG for D3 overlays -->
+    <div id="map">
+      <svg></svg>
+    </div>
+    
+    <!-- Legend for traffic flow and station sizes -->
+    <div class="legend">
+      <div class="legend-title">
+        BlueBikes Traffic Flow <span id="time-label">all day</span>
+      </div>
+      
+      <div class="color-scale">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      
+      <div class="legend-labels">
+        <div>100% Departures</div>
+        <div>Balanced</div>
+        <div>100% Arrivals</div>
+      </div>
+      
+      <div class="size-legend">
+        <div>Station Traffic:</div>
+        <div class="size-circles">
+          <span class="size-circle" style="width: 10px; height: 10px;"></span>
+          <span class="size-circle" style="width: 20px; height: 20px;"></span>
+          <span class="size-circle" style="width: 30px; height: 30px;"></span>
+        </div>
+        <div class="size-labels">
+          <span>Low</span>
+          <span>Medium</span>
+          <span>High</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Import our main JavaScript files as ES modules -->
+    <script src="map.js" type="module"></script>
+    <script src="theme.js" type="module"></script>
+  </body>
+</html>
